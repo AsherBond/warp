@@ -102,7 +102,7 @@ Warp checks the installed driver during initialization and will report a warning
     Warp UserWarning:
        Insufficient CUDA driver version.
        The minimum required CUDA driver version is 12.0, but the installed CUDA driver version is 11.8.
-       Visit https://nvidia.github.io/warp/user_guide/installation.html for guidance.
+       Visit https://nvidia.github.io/warp/stable/user_guide/installation.html for guidance.
 
 This will make CUDA devices unavailable, but the CPU can still be used.
 
@@ -166,7 +166,19 @@ Upon success, the script will output platform-specific binary files in ``warp/bi
 The build script will look for the CUDA Toolkit in its default installation path.
 This path can be overridden by setting the ``CUDA_PATH`` environment variable. Alternatively,
 the path to the CUDA Toolkit can be passed to the build command as
-``--cuda-path="..."``. After building, the Warp package should be installed using:
+``--cuda-path="..."``.
+
+By default, CUDA libraries (cudart, NVRTC, nvJitLink, MathDx) are linked statically
+to produce self-contained binaries. To link against shared CUDA libraries instead,
+pass ``--use-dynamic-cuda``:
+
+.. code-block:: console
+
+    $ python build_lib.py --use-dynamic-cuda
+
+The corresponding shared libraries must be available at runtime when using this option.
+
+After building, the Warp package should be installed using:
 
 .. code-block:: console
 
