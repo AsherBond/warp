@@ -497,6 +497,12 @@
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">wp.ref[T]</span></code> parameter annotation for <code class="docutils literal notranslate"><span class="pre">&#64;wp.func</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;wp.func_native</span></code>, enabling explicit pass-by-reference
+semantics for scalar, vector, matrix, quaternion, and struct types. Mutations to a <code class="docutils literal notranslate"><span class="pre">wp.ref[T]</span></code> parameter are visible
+in the caller’s storage without a return value. Add <code class="docutils literal notranslate"><span class="pre">wp.address_of(expr)</span> <span class="pre">-&gt;</span> <span class="pre">wp.uint64</span></code> for obtaining a raw pointer
+to an addressable expression for use with native snippets, and allow <code class="docutils literal notranslate"><span class="pre">&#64;wp.func_native</span></code> ref-parameter functions to
+provide manual adjoints with <code class="docutils literal notranslate"><span class="pre">adj_snippet</span></code>
+(<a class="reference external" href="https://github.com/NVIDIA/warp/issues/1277">GH-1277</a>).</p></li>
 <li><p>Add mipmap (texture level-of-detail) support to <code class="docutils literal notranslate"><span class="pre">wp.Texture1D</span></code>, <code class="docutils literal notranslate"><span class="pre">wp.Texture2D</span></code>, and <code class="docutils literal notranslate"><span class="pre">wp.Texture3D</span></code> via the new
 <code class="docutils literal notranslate"><span class="pre">num_mip_levels</span></code> and <code class="docutils literal notranslate"><span class="pre">mip_filter_mode</span></code> constructor parameters, and allow <code class="docutils literal notranslate"><span class="pre">wp.texture_sample()</span></code> to accept an optional
 trailing <code class="docutils literal notranslate"><span class="pre">lod</span></code> argument for controlling sampled detail level (<a class="reference external" href="https://github.com/NVIDIA/warp/issues/1409">GH-1409</a>).</p></li>
@@ -511,6 +517,8 @@ into a <code class="docutils literal notranslate"><span class="pre">wp.array</sp
 <li><p>Add row-capacity support to <code class="docutils literal notranslate"><span class="pre">warp.sparse</span></code> BSR matrices, including padded topology policies for topology-changing
 sparse operations, <code class="docutils literal notranslate"><span class="pre">bsr_zeros(row_capacity=...)</span></code> for reserving row capacity, <code class="docutils literal notranslate"><span class="pre">bsr_compress()</span></code> for inplace compaction of sparse matrices, and sparse status constants for overflow checks (<a class="reference external" href="https://github.com/NVIDIA/warp/issues/1537">GH-1537</a>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fem.integrate()</span></code> and <code class="docutils literal notranslate"><span class="pre">fem.interpolate()</span></code> can now leverage <code class="docutils literal notranslate"><span class="pre">sparse.bsr_compress()</span></code> to perform inplace matrix assembly, reducing peak memory usage (<a class="reference external" href="https://github.com/NVIDIA/warp/issues/1537">GH-1537</a>).</p></li>
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">cluster_dim</span></code> option to <code class="docutils literal notranslate"><span class="pre">&#64;wp.kernel</span></code> and a <code class="docutils literal notranslate"><span class="pre">wp.get_cuda_max_cluster_dim()</span></code> query helper for using CUDA Thread
+Block Clusters from <code class="docutils literal notranslate"><span class="pre">&#64;wp.func_native</span></code> code (<a class="reference external" href="https://github.com/NVIDIA/warp/issues/1401">GH-1401</a>).</p></li>
 </ul>
 </section>
 <section id="removed">
@@ -602,6 +610,8 @@ register successfully instead of raising <code class="docutils literal notransla
 <li><p>Fix the gradient of <code class="docutils literal notranslate"><span class="pre">wp.copy()</span></code> when <code class="docutils literal notranslate"><span class="pre">src_offset</span></code> and <code class="docutils literal notranslate"><span class="pre">dest_offset</span></code> differ.</p></li>
 <li><p>Fix <code class="docutils literal notranslate"><span class="pre">warp.init()</span></code> segfault while loading <code class="docutils literal notranslate"><span class="pre">warp-clang.so</span></code> on some Linux systems caused by aggressive symbol stripping.
 (<a class="reference external" href="https://github.com/NVIDIA/warp/issues/1554">GH-1554</a>).</p></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">wp.array[...]</span></code>-style subscript annotations to allow for PEP 604 unions (for example, <code class="docutils literal notranslate"><span class="pre">wp.array[float]</span> <span class="pre">|</span> <span class="pre">float</span></code>)
+on Python methods (<a class="reference external" href="https://github.com/NVIDIA/warp/issues/1548">GH-1548</a>).</p></li>
 </ul>
 </section>
 <section id="documentation">
