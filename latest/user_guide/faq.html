@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>FAQ &#8212; Warp 1.18.0.dev5</title>
+    <title>FAQ &#8212; Warp 1.19.0.dev0</title>
   
   
   
@@ -44,7 +44,7 @@
 
 
 
-    <script src="../_static/documentation_options.js?v=93b743e9"></script>
+    <script src="../_static/documentation_options.js?v=b77277d8"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -70,7 +70,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.18.0.dev5" />
+  <meta name="docsearch:version" content="1.19.0.dev0" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -147,11 +147,11 @@
       
     
     
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.18.0.dev5 - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.18.0.dev5 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.19.0.dev0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.19.0.dev0 - Home"/>
   
   
-    <p class="title logo__title">Warp 1.18.0.dev5</p>
+    <p class="title logo__title">Warp 1.19.0.dev0</p>
   
 </a></div>
     
@@ -291,11 +291,11 @@
       
     
     
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.18.0.dev5 - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.18.0.dev5 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.19.0.dev0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.19.0.dev0 - Home"/>
   
   
-    <p class="title logo__title">Warp 1.18.0.dev5</p>
+    <p class="title logo__title">Warp 1.19.0.dev0</p>
   
 </a>
 
@@ -732,10 +732,9 @@ Blackwell platforms when the system meets the current driver and runtime
 requirements. Run <a class="reference internal" href="../api_reference/_generated/warp.print_diagnostics.html#warp.print_diagnostics" title="warp.print_diagnostics"><code class="xref py py-func docutils literal notranslate"><span class="pre">wp.print_diagnostics()</span></code></a> to
 see the installed Warp build and the devices it detects.</p>
 <p>On DGX Spark, use <code class="docutils literal notranslate"><span class="pre">warp-lang[examples]</span></code> when the examples or Universal Scene
-Description (USD) rendering are needed. It installs <code class="docutils literal notranslate"><span class="pre">usd-exchange</span></code> because
-<code class="docutils literal notranslate"><span class="pre">usd-core</span></code> does not publish Linux AArch64 wheels. The core <code class="docutils literal notranslate"><span class="pre">warp-lang</span></code>
-package does not require either one. See <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a> for the current
-package choices.</p>
+Description (USD) rendering are needed. The core <code class="docutils literal notranslate"><span class="pre">warp-lang</span></code> package does not
+require OpenUSD. See the <a class="reference internal" href="installation.html#openusd-dependencies"><span class="std std-ref">OpenUSD dependency guidance</span></a>
+for how the examples extra provides the <code class="docutils literal notranslate"><span class="pre">pxr</span></code> modules on supported platforms.</p>
 <p>CPU/GPU coherence does not make ordinary Warp CPU and CUDA arrays
 interchangeable. Standard Warp CUDA arrays are not managed-memory allocations.
 Warp supports opt-in CUDA managed-memory arrays through
@@ -983,6 +982,12 @@ states and replays the work between them during the backward pass. Applications
 currently implement this themselves. The <a class="reference external" href="https://github.com/NVIDIA/warp/blob/main/warp/examples/optim/example_fluid_checkpoint.py">fluid checkpointing example</a>
 shows one implementation. See <a class="reference internal" href="differentiability.html"><span class="doc">Differentiability</span></a> for the full overwrite
 and replay rules.</p>
+<p>For fixed linear operations, the derivative does not depend on the intermediate
+values. The <a class="reference external" href="https://github.com/NVIDIA/warp/blob/main/warp/examples/optim/example_fluid_checkpoint_custom_backward.py">fluid checkpointing example with a custom pressure-solve backward
+pass</a>
+uses <a class="reference internal" href="../api_reference/_generated/warp.Tape.html#warp.Tape.record_func" title="warp.Tape.record_func"><code class="xref py py-meth docutils literal notranslate"><span class="pre">warp.Tape.record_func()</span></code></a> to differentiate a fixed number of pressure
+iterations with two reusable scratch grids. It preserves the gradient through
+the pressure warm start and combines this with checkpointing across time steps.</p>
 </section>
 <section id="why-can-array-overwrites-produce-unexpected-gradients">
 <h3>Why can array overwrites produce unexpected gradients?<a class="headerlink" href="#why-can-array-overwrites-produce-unexpected-gradients" title="Link to this heading">#</a></h3>
