@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Limitations &#8212; Warp 1.19.0.dev0</title>
+    <title>Limitations &#8212; Warp 1.19.0.dev1</title>
   
   
   
@@ -44,7 +44,7 @@
 
 
 
-    <script src="../_static/documentation_options.js?v=b77277d8"></script>
+    <script src="../_static/documentation_options.js?v=130af3c1"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -71,7 +71,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.19.0.dev0" />
+  <meta name="docsearch:version" content="1.19.0.dev1" />
   
     
     <script src="../_static/searchtools.js"></script>
@@ -148,11 +148,11 @@
       
     
     
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.19.0.dev0 - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.19.0.dev0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.19.0.dev1 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.19.0.dev1 - Home"/>
   
   
-    <p class="title logo__title">Warp 1.19.0.dev0</p>
+    <p class="title logo__title">Warp 1.19.0.dev1</p>
   
 </a></div>
     
@@ -292,11 +292,11 @@
       
     
     
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.19.0.dev0 - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.19.0.dev0 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Warp 1.19.0.dev1 - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Warp 1.19.0.dev1 - Home"/>
   
   
-    <p class="title logo__title">Warp 1.19.0.dev0</p>
+    <p class="title logo__title">Warp 1.19.0.dev1</p>
   
 </a>
 
@@ -683,19 +683,19 @@ The behavior of the modulus operator in a Warp kernel follows that of C++11: The
 </section>
 <section id="power-operator">
 <h3>Power Operator<a class="headerlink" href="#power-operator" title="Link to this heading">#</a></h3>
-<p>The power operator (<code class="docutils literal notranslate"><span class="pre">**</span></code>) in Warp kernels only works on floating-point numbers (also see <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#pow" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">wp.pow()</span></code></a>).
+<p>The power operator (<code class="docutils literal notranslate"><span class="pre">**</span></code>) in Warp kernels only works on floating-point numbers (also see <a class="reference external" href="https://docs.python.org/3/builtins/functions.html#pow" title="(in Python v3.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">wp.pow()</span></code></a>).
 In Python, the power operator can also be used on integers.</p>
 </section>
 <section id="inverse-sine-and-cosine">
 <h3>Inverse Sine and Cosine<a class="headerlink" href="#inverse-sine-and-cosine" title="Link to this heading">#</a></h3>
 <p><a class="reference internal" href="../language_reference/_generated/warp.asin.html#warp._src.lang.asin" title="warp._src.lang.asin"><code class="xref py py-func docutils literal notranslate"><span class="pre">wp.asin()</span></code></a> and <a class="reference internal" href="../language_reference/_generated/warp.acos.html#warp._src.lang.acos" title="warp._src.lang.acos"><code class="xref py py-func docutils literal notranslate"><span class="pre">wp.acos()</span></code></a> automatically clamp the input to fall in the range [-1, 1].
-In Python, using <a class="reference external" href="https://docs.python.org/3/library/math.html#math.asin" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.asin()</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/math.html#math.acos" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.acos()</span></code></a>
+In Python, using <a class="reference external" href="https://docs.python.org/3/library/math.html#math.asin" title="(in Python v3.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.asin()</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/math.html#math.acos" title="(in Python v3.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.acos()</span></code></a>
 with an input outside [-1, 1] raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception.</p>
 </section>
 <section id="rounding">
 <h3>Rounding<a class="headerlink" href="#rounding" title="Link to this heading">#</a></h3>
 <p><a class="reference internal" href="../language_reference/_generated/warp.round.html#warp._src.lang.round" title="warp._src.lang.round"><code class="xref py py-func docutils literal notranslate"><span class="pre">wp.round()</span></code></a> rounds halfway cases away from zero, but Python’s
-<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#round" title="(in Python v3.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">round()</span></code></a> rounds halfway cases to the nearest even
+<a class="reference external" href="https://docs.python.org/3/builtins/functions.html#round" title="(in Python v3.15)"><code class="xref py py-func docutils literal notranslate"><span class="pre">round()</span></code></a> rounds halfway cases to the nearest even
 choice (Banker’s rounding). Use <a class="reference internal" href="../language_reference/_generated/warp.rint.html#warp._src.lang.rint" title="warp._src.lang.rint"><code class="xref py py-func docutils literal notranslate"><span class="pre">wp.rint()</span></code></a> when Banker’s rounding is
 desired. Unlike Python, the return type in Warp of both of these rounding
 functions is the same type as the input:</p>
