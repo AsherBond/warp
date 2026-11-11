@@ -1611,7 +1611,8 @@ useful when the graph will be launched more than once.
 Conditional Execution
 #####################
 
-CUDA 12.4+ supports conditional graph nodes that enable dynamic control flow in CUDA graphs.
+Graph capture supports dynamic control flow on both CPU and CUDA devices.
+CUDA graph capture implements it with conditional graph nodes, which require CUDA 12.4+.
 
 :func:`wp.capture_if <warp.capture_if>` creates a dynamic branch based on a condition. The condition value is read from a single-element ``int`` array, where a non-zero value means that the condition is True.
 
@@ -1642,12 +1643,13 @@ The condition value can be updated by kernels launched prior to ``capture_if()``
     cond.fill_(0)
     wp.capture_launch(capture.graph)
 
-For CUDA graph capture with ``apic=False``, ``on_true`` and ``on_false`` can
-be previously captured graph objects or Python callback functions. Python
-callbacks are captured as child graphs of the enclosing graph.
+``on_true`` and ``on_false`` can be previously captured graph objects or Python callback functions,
+subject to the restrictions on graph objects in the notes at the end of this section.
+Python callbacks are captured as child graphs of the enclosing graph.
 It's possible to specify only one or both callbacks, as needed.
 When the parent graph is launched, the correct child graph is executed based on the value of the condition.
-This is done efficiently on the device without involving the CPU. 
+On CUDA devices, this is done efficiently on the GPU without involving the CPU.
+On CPU devices, graph replay evaluates the condition in native code without calling back into Python.
 
 Here is an example that uses previously captured graphs:
 
@@ -1774,9 +1776,10 @@ When using Python callback functions, any extra keyword arguments to :func:`wp.c
 
 The ``while_body`` callback will be executed as long as the condition is
 non-zero. The callback is responsible for updating the condition value so that
-the loop eventually terminates. For CUDA graph capture with ``apic=False``,
-``while_body`` can be a previously captured graph or a Python callback
-function. Here is an example that will run some number of iterations, using the
+the loop eventually terminates.
+``while_body`` can be a previously captured graph or a Python callback function,
+subject to the restrictions on graph objects in the notes at the end of this section.
+Here is an example that will run some number of iterations, using the
 condition value as a counter:
 
 .. code:: python
@@ -1833,13 +1836,42 @@ condition value as a counter:
     CUDA graph conditional nodes.
 
 .. note::
-    Due to a current CUDA limitation, graphs with conditional nodes cannot be
-    used as child graphs. It means that it's not possible to create nested
-    conditional constructs using previously captured graphs. If nesting is
-    required, use Python callback functions. APIC recording—all CPU captures
-    and CUDA captures with ``apic=True``—also requires Python callbacks for
-    ``capture_if()`` / ``capture_while()`` bodies; passing previously captured
-    :class:`Graph` objects is not yet implemented.
+    Due to a current CUDA limitation, CUDA graphs with conditional nodes cannot be used as child graphs.
+    A previously captured graph used as a branch or loop body therefore cannot itself contain conditionals,
+    and CPU capture enforces the same rule so that code behaves the same on both devices.
+    If nesting is required, use Python callback functions.
+    CUDA captures with ``apic=True`` also require Python callbacks
+    for ``capture_if()`` / ``capture_while()`` bodies.
+    CPU captures accept previously captured CPU :class:`Graph` objects as branches and loop bodies,
+    but not yet graphs loaded with :func:`wp.capture_load() <warp.capture_load>`.
+    :func:`wp.capture_save() <warp.capture_save>` rejects a CPU graph that records a :class:`Graph` branch.
+
+.. note::
+    CUDA does not allow memory allocations inside conditional body graphs, so
+    operations that allocate temporary storage on each call cannot be captured
+    in a :func:`wp.capture_if <warp.capture_if>` or
+    :func:`wp.capture_while <warp.capture_while>` body. For prefix sums, pass a
+    preallocated buffer through the ``temp_storage`` argument of
+    :func:`wp.utils.array_scan() <warp.utils.array_scan>`, sized with
+    :func:`wp.utils.array_scan_temp_storage_size() <warp.utils.array_scan_temp_storage_size>`:
+
+    .. code:: python
+
+        n = counts.size
+        temp = wp.empty(wp.utils.array_scan_temp_storage_size(n, counts.dtype), dtype=wp.uint8)
+
+        def body():
+            wp.utils.array_scan(counts, offsets, inclusive=False, temp_storage=temp)
+            ...
+
+        with wp.ScopedCapture() as capture:
+            wp.capture_while(cond, while_body=body)
+
+    The same applies to CUDA graph captures that Warp did not start, such as a
+    capture begun by another framework. Graphs saved with
+    :func:`wp.capture_save() <warp.capture_save>` do not store the buffer; a
+    graph loaded on a CUDA device allocates its own scan storage once, when it
+    is loaded.
 
 .. note::
     :func:`wp.capture_if <warp.capture_if>` and :func:`wp.capture_while <warp.capture_while>` will work even without graph capture on any device. If there is no active capture, the condition will be evaluated on the CPU and the correct branch will be executed immediately. This makes it possible to write code that works similarly with and without graph capture.
@@ -1892,17 +1924,20 @@ CPU graph capture currently supports:
   :meth:`Tape.backward() <warp.Tape.backward>`).
 - Reusable launches created with ``wp.launch(..., record_cmd=True)`` when they
   are replayed with :meth:`Launch.launch() <warp.Launch.launch>`.
-- Memory copies (:func:`wp.copy() <warp.copy>`) and zero-initialization
-  (:meth:`array.zero_() <warp.array.zero_>`), plus contiguous
-  :meth:`array.fill_() <warp.array.fill_>`.
+- Memory copies (:func:`wp.copy() <warp.copy>`), and :meth:`array.zero_() <warp.array.zero_>`
+  and :meth:`array.fill_() <warp.array.fill_>` on contiguous arrays, strided views, and
+  :class:`wp.indexedarray <warp.indexedarray>`. Indexed fills read the index arrays on each
+  replay.
 - Host library helpers including
   :func:`wp.utils.array_sum() <warp.utils.array_sum>`,
   :func:`wp.utils.array_inner() <warp.utils.array_inner>`,
   :func:`wp.utils.array_scan() <warp.utils.array_scan>`,
   :func:`wp.utils.radix_sort_pairs() <warp.utils.radix_sort_pairs>`,
   :func:`wp.utils.segmented_sort_pairs() <warp.utils.segmented_sort_pairs>`,
-  :func:`wp.utils.runlength_encode() <warp.utils.runlength_encode>`, and the
-  ``warp.sparse`` BSR ``from_triplets`` / ``transpose`` topology builders.
+  :func:`wp.utils.runlength_encode() <warp.utils.runlength_encode>`, the
+  ``warp.sparse`` BSR ``from_triplets`` / ``transpose`` topology builders, and
+  :func:`wp.sparse.bsr_compress() <warp.sparse.bsr_compress>`, which replays on the
+  current offsets, row counts, columns, and values.
 - Bounding-volume-hierarchy updates (:meth:`wp.Bvh.refit() <warp.Bvh.refit>` and
   :meth:`wp.Bvh.rebuild() <warp.Bvh.rebuild>`), re-run on replay against the
   current ``lowers`` / ``uppers`` so a captured graph queries the updated tree.
@@ -1944,10 +1979,11 @@ Important CPU graph behavior and current limitations:
   ``run_count`` array during CPU graph capture; the host-return form (``run_count=None``)
   raises :exc:`NotImplementedError`, because its capture-time host integer cannot
   represent the replay-time result.
-- Non-contiguous :func:`wp.copy() <warp.copy>`, non-contiguous
-  :meth:`array.fill_() <warp.array.fill_>`, and fills on
-  :class:`wp.indexedarray <warp.indexedarray>` / ``wp.fabricarray`` raise
-  :exc:`NotImplementedError` inside a CPU :class:`ScopedCapture`.
+- Non-contiguous :func:`wp.copy() <warp.copy>`, and :meth:`array.fill_() <warp.array.fill_>`
+  or :meth:`array.zero_() <warp.array.zero_>` on arrays with negative strides or on
+  ``wp.fabricarray`` / ``wp.indexedfabricarray``, raise :exc:`NotImplementedError` inside a CPU
+  :class:`ScopedCapture`. So do strided and indexed fills with a value that holds an array, a
+  non-zero ``wp.handle``, or a texture, directly or in a struct field.
 - Reusable launches with array parameters must be updated through Warp-level
   setters such as :meth:`Launch.set_param_at_index() <warp.Launch.set_param_at_index>`.
   Raw ctype array parameters passed through
@@ -1999,7 +2035,7 @@ API Capture: Saving and Loading Graphs
     surface, the C ``wp_apic_*`` API, and the recorded operation set are all
     subject to change without a formal deprecation cycle. The writer and loader
     must use the same Warp version. The current writer and reader use format
-    version 18, which stores explicit element counts for handle relocations.
+    version 20, which adds records for strided and indexed array fills.
     Recapture graphs saved with earlier formats.
 
 The APIC operation stream lets Warp serialize a supported captured graph to
@@ -2021,8 +2057,9 @@ mechanism), and ``apic=True`` simply enables
 
 On CUDA, ``apic=True`` records the following supported operations so saved
 graphs replay them from current inputs: kernel launches (forward, adjoint, and reusable
-``record_cmd=True`` launches), contiguous same-device memory copies and memsets, contiguous
-:meth:`array.fill_() <warp.array.fill_>`,
+``record_cmd=True`` launches), contiguous same-device memory copies and memsets,
+:meth:`array.fill_() <warp.array.fill_>` on contiguous arrays, strided views, and
+:class:`wp.indexedarray <warp.indexedarray>`,
 :func:`wp.utils.array_sum() <warp.utils.array_sum>`,
 :func:`wp.utils.array_inner() <warp.utils.array_inner>`,
 :func:`wp.utils.array_scan() <warp.utils.array_scan>`,
@@ -2034,7 +2071,8 @@ graphs replay them from current inputs: kernel launches (forward, adjoint, and r
 :func:`wp.sparse.bsr_assign() <warp.sparse.bsr_assign>`,
 :func:`wp.sparse.bsr_axpy() <warp.sparse.bsr_axpy>`,
 :func:`wp.sparse.bsr_mm() <warp.sparse.bsr_mm>` when no host count readback is required,
-:func:`wp.sparse.bsr_set_transpose() <warp.sparse.bsr_set_transpose>`, and
+:func:`wp.sparse.bsr_set_transpose() <warp.sparse.bsr_set_transpose>`,
+:func:`wp.sparse.bsr_compress() <warp.sparse.bsr_compress>`, and
 :func:`wp.capture_if() <warp.capture_if>` / :func:`wp.capture_while() <warp.capture_while>`
 conditionals. Unlike the CPU path, CUDA host code for these helper operations
 issues CUDA operations while CUDA stream capture is active so the driver
@@ -2063,8 +2101,10 @@ region:
 - :meth:`HashGrid.build() <warp.HashGrid.build>`, because ``HashGrid``
   resources and their process-local IDs cannot yet be serialized. Use
   ``apic=False`` for live CUDA graph capture.
-- Non-contiguous :meth:`array.fill_() <warp.array.fill_>`, indexed/Fabric ``fill_()``, and
-  contiguous fills whose value is larger than 3968 bytes.
+- :meth:`array.fill_() <warp.array.fill_>` on arrays with negative strides or on Fabric
+  arrays, fills whose value is larger than 3968 bytes, and strided and indexed fills with a
+  value that holds an array, a non-zero ``wp.handle``, or a texture, directly or in a struct
+  field.
 - The host-return form of :func:`wp.utils.runlength_encode() <warp.utils.runlength_encode>`
   (``run_count=None``).
 - :func:`wp.copy() <warp.copy>` other than a contiguous same-device copy: cross-device copies
