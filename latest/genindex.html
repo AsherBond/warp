@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 
@@ -27,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/nvidia-sphinx-theme.css?v=933278ad" />
@@ -36,10 +35,10 @@
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=ca94f457" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
 
 
@@ -50,7 +49,7 @@
     <script src="_static/copybutton.js?v=fd10adb8"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.24.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://nvidia.github.io/warp/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'latest';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -66,6 +65,7 @@
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.20.0.dev0" />
   
@@ -120,7 +120,7 @@
   
     <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
     <span class="fa-solid fa-bars"></span>
   </button>
   
@@ -188,7 +188,7 @@
         <div class="navbar-item navbar-persistent--container">
           
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -199,15 +199,15 @@
         <div class="navbar-item">
 
 <div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
-    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
   </ul>
 </div></div>
       
@@ -244,7 +244,7 @@
   
     <div class="navbar-persistent--mobile">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
  <i class="fa-solid fa-magnifying-glass"></i>
  <span class="search-button__default-text">Search</span>
  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -263,7 +263,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
@@ -333,15 +333,15 @@
           <div class="navbar-item">
 
 <div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
-    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
   </button>
   <ul class="dropdown-menu dropdown-menu-end">
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
-    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg me-1"></i>Dark</button></li>
   </ul>
 </div></div>
         
@@ -389,7 +389,10 @@
 <li class="toctree-l1"><a class="reference internal" href="user_guide/compatibility.html">Compatibility &amp; Support</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide/basics.html">Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guide/runtime.html">Runtime</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/differentiability.html">Differentiability</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="user_guide/differentiability.html">Differentiability</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/forward_mode_jets.html">Forward-Mode Jets</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="user_guide/programming_model.html">Programming Model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/programming_model/generics.html">Generics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user_guide/programming_model/tiles.html">Tiles</a></li>
@@ -1931,7 +1934,11 @@
       <li><a href="api_reference/_generated/warp.fem.ElementKind.html#warp.fem.ElementKind">ElementKind (class in warp.fem)</a>
 </li>
       <li><a href="api_reference/_generated/warp.empty.html#warp.empty">empty() (in module warp)</a>
+
+      <ul>
+        <li><a href="language_reference/_generated/warp.empty.html#warp._src.lang.empty">(in module warp._src.lang)</a>
 </li>
+      </ul></li>
       <li><a href="api_reference/_generated/warp.empty_like.html#warp.empty_like">empty_like() (in module warp)</a>
 </li>
       <li><a href="api_reference/_generated/warp.config.enable_backward.html#warp.config.enable_backward">enable_backward (in module warp.config)</a>
@@ -2586,14 +2593,22 @@
 </li>
       <li><a href="api_reference/_generated/warp.Device.html#warp.Device.has_stream">has_stream (warp.Device property)</a>
 </li>
+      <li><a href="api_reference/_generated/warp.fem.PicQuadrature.html#warp.fem.PicQuadrature.has_unique_evaluation_indices">has_unique_evaluation_indices() (warp.fem.PicQuadrature method)</a>
+
+      <ul>
+        <li><a href="api_reference/_generated/warp.fem.Quadrature.html#warp.fem.Quadrature.has_unique_evaluation_indices">(warp.fem.Quadrature method)</a>
+</li>
+      </ul></li>
+      <li><a href="api_reference/_generated/warp.fem.SpaceTopology.html#warp.fem.SpaceTopology.has_unique_node_incidence">has_unique_node_incidence() (warp.fem.SpaceTopology method)</a>
+</li>
       <li><a href="api_reference/_generated/warp.Kernel.html#warp.Kernel.hash">hash (warp.Kernel property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="language_reference/_generated/warp.hash_grid_point_id.html#warp._src.lang.hash_grid_point_id">hash_grid_point_id() (in module warp._src.lang)</a>
 </li>
       <li><a href="language_reference/_generated/warp.hash_grid_query.html#warp._src.lang.hash_grid_query">hash_grid_query() (in module warp._src.lang)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="language_reference/_generated/warp.hash_grid_query_next.html#warp._src.lang.hash_grid_query_next">hash_grid_query_next() (in module warp._src.lang)</a>
 </li>
       <li><a href="api_reference/_generated/warp.Module.html#warp.Module.hash_module">hash_module() (warp.Module method)</a>
@@ -2740,16 +2755,28 @@
       </ul></li>
       <li><a href="api_reference/_generated/warp.Event.html#warp.Event.Flags.INTERPROCESS">INTERPROCESS (warp.Event.Flags attribute)</a>
 </li>
-      <li><a href="language_reference/_generated/warp.intersect_tri_tri.html#warp._src.lang.intersect_tri_tri">intersect_tri_tri() (in module warp._src.lang)</a>
+      <li><a href="api_reference/_generated/warp.geometry.intersect_aabb_aabb.html#warp.geometry.intersect_aabb_aabb">intersect_aabb_aabb() (in module warp.geometry)</a>
 </li>
+      <li><a href="api_reference/_generated/warp.geometry.intersect_seg_aabb.html#warp.geometry.intersect_seg_aabb">intersect_seg_aabb() (in module warp.geometry)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.geometry.intersect_seg_tri.html#warp.geometry.intersect_seg_tri">intersect_seg_tri() (in module warp.geometry)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.geometry.intersect_tri_aabb.html#warp.geometry.intersect_tri_aabb">intersect_tri_aabb() (in module warp.geometry)</a>
+</li>
+      <li><a href="language_reference/_generated/warp.intersect_tri_tri.html#warp._src.lang.intersect_tri_tri">intersect_tri_tri() (in module warp._src.lang)</a>
+
+      <ul>
+        <li><a href="api_reference/_generated/warp.geometry.intersect_tri_tri.html#warp.geometry.intersect_tri_tri">(in module warp.geometry)</a>
+</li>
+      </ul></li>
       <li><a href="language_reference/_generated/warp.inverse.html#warp._src.lang.inverse">inverse() (in module warp._src.lang)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="language_reference/_generated/warp.inverse_approx.html#warp._src.lang.inverse_approx">inverse_approx() (in module warp._src.lang)</a>
 </li>
       <li><a href="api_reference/_generated/warp.fem.linalg.inverse_qr.html#warp.fem.linalg.inverse_qr">inverse_qr() (in module warp.fem.linalg)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="language_reference/_generated/warp.invert.html#warp._src.lang.invert">invert() (in module warp._src.lang)</a>
 </li>
       <li><a href="api_reference/_generated/warp.array.html#warp.array.ipc_handle">ipc_handle() (warp.array method)</a>
@@ -2890,15 +2917,19 @@
 </li>
       <li><a href="api_reference/_generated/warp.JaxCallableGraphMode.html#warp.JaxCallableGraphMode.JAX">JAX (warp.JaxCallableGraphMode attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/_generated/warp.jax_callable.html#warp.jax_callable">jax_callable() (in module warp)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/_generated/warp.jax_kernel.html#warp.jax_kernel">jax_kernel() (in module warp)</a>
 </li>
       <li><a href="api_reference/_generated/warp.JaxCallableGraphMode.html#warp.JaxCallableGraphMode">JaxCallableGraphMode (class in warp)</a>
 </li>
       <li><a href="api_reference/_generated/warp.JaxModulePreloadMode.html#warp.JaxModulePreloadMode">JaxModulePreloadMode (class in warp)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.JetSpace.html#warp.JetSpace">JetSpace() (in module warp)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.JetSpace2.html#warp.JetSpace2">JetSpace2() (in module warp)</a>
 </li>
       <li><a href="api_reference/_generated/warp.fem.jump.html#warp.fem.jump">jump (in module warp.fem)</a>
 </li>
@@ -3404,10 +3435,10 @@
       </ul></li>
       <li><a href="api_reference/_generated/warp.fem.BasisSpace.html#warp.fem.BasisSpace.make_node_sample">make_node_sample() (warp.fem.BasisSpace method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/_generated/warp.fem.make_polynomial_basis_space.html#warp.fem.make_polynomial_basis_space">make_polynomial_basis_space() (in module warp.fem)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/_generated/warp.fem.make_polynomial_space.html#warp.fem.make_polynomial_space">make_polynomial_space() (in module warp.fem)</a>
 </li>
       <li><a href="api_reference/_generated/warp.fem.make_restriction.html#warp.fem.make_restriction">make_restriction() (in module warp.fem)</a>
@@ -3573,6 +3604,8 @@
       <li><a href="api_reference/_generated/warp.Volume.html#warp.Volume.RebuildInfo.max_voxel_count">max_voxel_count (warp.Volume.RebuildInfo attribute)</a>
 </li>
       <li><a href="api_reference/_generated/warp.utils.GraphColoringAlgorithm.html#warp.utils.GraphColoringAlgorithm.MCS">MCS (warp.utils.GraphColoringAlgorithm attribute)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.geometry.OBBMeasureType.html#warp.geometry.OBBMeasureType.MEAN_WIDTH">MEAN_WIDTH (warp.geometry.OBBMeasureType attribute)</a>
 </li>
       <li><a href="api_reference/_generated/warp.fem.measure.html#warp.fem.measure">measure (in module warp.fem)</a>
 </li>
@@ -4023,6 +4056,8 @@
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_reference/_generated/warp.geometry.OBBMeasureType.html#warp.geometry.OBBMeasureType">OBBMeasureType (class in warp.geometry)</a>
+</li>
       <li><a href="api_reference/_generated/warp.sparse.BsrMatrix.html#warp.sparse.BsrMatrix.offsets">offsets (warp.sparse.BsrMatrix attribute)</a>
 </li>
       <li><a href="api_reference/_generated/warp.ones.html#warp.ones">ones() (in module warp)</a>
@@ -4045,11 +4080,15 @@
         <li><a href="api_reference/_generated/warp.fem.ShapeFunction.html#warp.fem.ShapeFunction.ORDER">(warp.fem.ShapeFunction attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/_generated/warp.Device.html#warp.Device.ordinal">ordinal (warp.Device attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/_generated/warp.fem.Grid2D.html#warp.fem.Grid2D.orient">orient (warp.fem.Grid2D attribute)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.geometry.oriented_bounding_box.html#warp.geometry.oriented_bounding_box">oriented_bounding_box() (in module warp.geometry)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.geometry.oriented_bounding_boxes.html#warp.geometry.oriented_bounding_boxes">oriented_bounding_boxes() (in module warp.geometry)</a>
 </li>
       <li><a href="api_reference/_generated/warp.fem.Grid2D.html#warp.fem.Grid2D.origin">origin (warp.fem.Grid2D property)</a>
 
@@ -4639,6 +4678,8 @@
 </li>
       <li><a href="language_reference/_generated/warp.select.html#warp._src.lang.select">select() (in module warp._src.lang)</a>
 </li>
+      <li><a href="api_reference/_generated/warp.geometry.self_intersect_tri_tri.html#warp.geometry.self_intersect_tri_tri">self_intersect_tri_tri() (in module warp.geometry)</a>
+</li>
       <li><a href="api_reference/_generated/warp.fem.ElementBasis.html#warp.fem.ElementBasis.SERENDIPITY">SERENDIPITY (warp.fem.ElementBasis attribute)</a>
 </li>
       <li><a href="api_reference/_generated/warp.set_cuda_allocator.html#warp.set_cuda_allocator">set_cuda_allocator() (in module warp)</a>
@@ -5201,6 +5242,8 @@
 </li>
       <li><a href="api_reference/_generated/warp.fem.Subdomain.html#warp.fem.Subdomain">Subdomain (class in warp.fem)</a>
 </li>
+      <li><a href="api_reference/_generated/warp.geometry.super_fibonacci.html#warp.geometry.super_fibonacci">super_fibonacci() (in module warp.geometry)</a>
+</li>
       <li><a href="api_reference/_generated/warp.Mesh.html#warp.Mesh.support_winding_number">support_winding_number (warp.Mesh attribute)</a>
 </li>
       <li><a href="api_reference/_generated/warp.fem.AdaptiveNanogrid.html#warp.fem.AdaptiveNanogrid.supports_cell_lookup">supports_cell_lookup() (warp.fem.AdaptiveNanogrid method)</a>
@@ -5235,6 +5278,8 @@
         <li><a href="api_reference/_generated/warp.geometry.IsoSurfaceNets.html#warp.geometry.IsoSurfaceNets.surface">(warp.geometry.IsoSurfaceNets method)</a>
 </li>
       </ul></li>
+      <li><a href="api_reference/_generated/warp.geometry.OBBMeasureType.html#warp.geometry.OBBMeasureType.SURFACE_AREA">SURFACE_AREA (warp.geometry.OBBMeasureType attribute)</a>
+</li>
       <li><a href="api_reference/_generated/warp.TextureResourceFlags.html#warp.TextureResourceFlags.SURFACE_LDST">SURFACE_LDST (warp.TextureResourceFlags attribute)</a>
 </li>
       <li><a href="language_reference/_generated/warp.svd2.html#warp._src.lang.svd2">svd2() (in module warp._src.lang)</a>
@@ -5835,6 +5880,8 @@
         <li><a href="api_reference/_generated/warp.fem.UniformField.html#warp.fem.UniformField.value">(warp.fem.UniformField property)</a>
 </li>
       </ul></li>
+      <li><a href="language_reference/_generated/warp.value.html#warp._src.lang.value">value() (in module warp._src.lang)</a>
+</li>
       <li><a href="api_reference/_generated/warp.fem.FunctionSpace.html#warp.fem.FunctionSpace.value_basis_element">value_basis_element() (warp.fem.FunctionSpace static method)</a>
 </li>
       <li><a href="api_reference/_generated/warp.Volume.html#warp.Volume.FeatureArrayInfo.value_count">value_count (warp.Volume.FeatureArrayInfo attribute)</a>
@@ -6036,6 +6083,8 @@
       <li><a href="api_reference/_generated/warp.fem.SymmetricTensorMapper.html#warp.fem.SymmetricTensorMapper.Mapping.VOIGT">VOIGT (warp.fem.SymmetricTensorMapper.Mapping attribute)</a>
 </li>
       <li><a href="api_reference/_generated/warp.Volume.html#warp.Volume">Volume (class in warp)</a>
+</li>
+      <li><a href="api_reference/_generated/warp.geometry.OBBMeasureType.html#warp.geometry.OBBMeasureType.VOLUME">VOLUME (warp.geometry.OBBMeasureType attribute)</a>
 </li>
       <li><a href="api_reference/_generated/warp.Volume.html#warp.Volume.ActiveStats">Volume.ActiveStats (class in warp)</a>
 </li>
@@ -6355,8 +6404,8 @@
   
 
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
 
 
   <footer class="bd-footer">
