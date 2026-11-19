@@ -433,8 +433,8 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../api_reference/warp.html">warp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference/warp_autograd.html">warp.autograd</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api_reference/warp_build_experimental.html">warp.build_experimental</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference/warp_config.html">warp.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference/warp_experimental.html">warp.experimental</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference/warp_fem.html">warp.fem</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference/warp_geometry.html">warp.geometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference/warp_optim.html">warp.optim</a></li>
@@ -853,8 +853,10 @@ respect to Python. Both devices use the same kernel language, but they have
 different performance and concurrency characteristics.</p>
 <p>Tile kernels need additional care on the CPU backend because its effective
 <code class="docutils literal notranslate"><span class="pre">block_dim</span></code> is one by default. The experimental
-<a class="reference internal" href="../api_reference/_generated/warp.config.enable_cpu_blocks.html#warp.config.enable_cpu_blocks" title="warp.config.enable_cpu_blocks"><code class="xref py py-attr docutils literal notranslate"><span class="pre">warp.config.enable_cpu_blocks</span></code></a> option honors explicit CPU block dimensions
-through 1024 with cooperative fibers on one host thread. Consult
+<a class="reference internal" href="../api_reference/_generated/warp.config.enable_cpu_blocks.html#warp.config.enable_cpu_blocks" title="warp.config.enable_cpu_blocks"><code class="xref py py-attr docutils literal notranslate"><span class="pre">warp.config.enable_cpu_blocks</span></code></a> option changes the CPU default to 256 and
+honors explicit CPU block dimensions through 1024 with cooperative fibers on one
+host thread. Pass <code class="docutils literal notranslate"><span class="pre">block_dim=1</span></code> explicitly to retain a single logical thread
+per block while the option is enabled. Consult
 <a class="reference internal" href="programming_model/tiles.html#cpu-tile-semantics"><span class="std std-ref">CPU Tile Semantics</span></a> when the same tile kernel must run
 on both backends. Other device differences are covered in <a class="reference internal" href="runtime.html#devices"><span class="std std-ref">Devices</span></a>.</p>
 </section>
